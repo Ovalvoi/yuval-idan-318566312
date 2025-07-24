@@ -1,0 +1,15 @@
+.phone-txt {
+    font-size: 10px;
+    color: rgb(0, 0, 0);
+}
+
+.card-content
+{
+justify-content: center;
+align-items: center;
+}
+
+.header-text
+{
+    text-align: center;
+}
