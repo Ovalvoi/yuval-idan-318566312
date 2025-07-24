@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול הצעות - קרקס הרגשות</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="view-page">
+    <header>
+        <h1>ניהול הצעות למופעים</h1>
+        <nav>
+            <a href="index.html">הגשת הצעה</a>
+            <a href="view.html">צפייה בהצעות</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="filter-container">
+            <label for="emotion-filter">סנן לפי רגש:</label>
+            <select id="emotion-filter">
+                <option value="הכל">הכל</option>
+                <option value="שמחה">שמחה</option>
+                <option value="פחד">פחד</option>
+                <option value="בלבול">בלבול</option>
+                <option value="געגוע">געגוע</option>
+            </select>
+        </div>
+        <div id="ideas-container">
+            </div>
+    </main>
+</body>
+<script src="script.js"></script>
+</html>

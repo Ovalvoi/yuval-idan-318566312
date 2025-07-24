@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הצעת מופע לקרקס הרגשות</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>קרקס הרגשות הנודד - הגשת רעיון</h1>
+        <nav>
+            <a href="index.html">הגשת הצעה</a>
+            <a href="view.html">צפייה בהצעות</a>
+        </nav>
+    </header>
+
+    <main>
+        <form id="idea-form">
+            <h2>פרטי המופע המוצע</h2>
+            
+            <label for="attraction-name">שם האטרקציה:</label>
+            <input type="text" id="attraction-name">
+
+            <label for="main-emotion">הרגש המרכזי:</label>
+            <select id="main-emotion">
+                <option value="שמחה">שמחה</option>
+                <option value="פחד">פחד</option>
+                <option value="בלבול">בלבול</option>
+                <option value="געגוע">געגוע</option>
+            </select>
+
+            <label>סוג המופע:</label>
+            <div class="radio-group">
+                <input type="radio" id="participation" name="type" value="השתתפות" checked>
+                <label for="participation">מצריך השתתפות</label>
+                <input type="radio" id="viewing" name="type" value="צפייה">
+                <label for="viewing">צפייה בלבד</label>
+            </div>
+
+            <label for="intensity">דרגת אינטנסיביות (1-5):</label>
+            <input type="number" id="intensity">
+            
+            <label for="age-limit">מגבלת גיל:</label>
+            <input type="number" id="age-limit">
+
+            <label for="creator-email">אימייל יוצר הרעיון:</label>
+            <input type="email" id="creator-email">
+
+            <div id="form-messages"></div>
+        </form>
+    </main>
+</body>
+<script src="script.js"></script>
+</html>
