@@ -60,3 +60,81 @@ function handleFormSubmit() {
     ideaForm.reset();
 }
 
+
+
+function loadItems() {
+    const itemsJson = localStorage.getItem('circusIdeas');
+    return itemsJson ? JSON.parse(itemsJson) : [];
+}
+
+function getStatusInfo(status) {
+    if (status === 'אושרה') return { text: 'אושרה', color: 'green' };
+    if (status === 'נדחתה') return { text: 'נדחתה', color: 'red' };
+    return { text: 'חדשה', color: 'black' };
+}
+
+function renderItems(emotionFilter) {
+    const container = document.getElementById('ideas-container');
+    container.innerHTML = ''; 
+    let items = loadItems();
+
+    if (emotionFilter !== 'הכל') {
+        items = items.filter(item => item.emotion === emotionFilter);
+    }
+    
+    if (items.length === 0) {
+        container.innerHTML = '<p>לא נמצאו הצעות התואמות לסינון.</p>';
+        return;
+    }
+
+    items.forEach(item => {
+        const statusInfo = getStatusInfo(item.status);
+        const cardHTML = `
+            <div class="idea-card">
+                <h3>${item.name}</h3>
+                <p><strong>רגש מרכזי:</strong> ${item.emotion}</p>
+                <p><strong>סוג:</strong> ${item.type}</p>
+                <p><strong>אינטנסיביות:</strong> ${item.intensity}</p>
+                <p><strong>מגבלת גיל:</strong> ${item.ageLimit || 'אין'}</p>
+                <div>
+                    <strong>סטטוס:</strong> 
+                    <select onchange="updateItemStatus(${item.id}, this.value)">
+                        <option value="חדשה" ${item.status === 'חדשה' ? 'selected' : ''}>חדשה</option>
+                        <option value="אושרה" ${item.status === 'אושרה' ? 'selected' : ''}>אושרה</option>
+                        <option value="נדחתה" ${item.status === 'נדחתה' ? 'selected' : ''}>נדחתה</option>
+                    </select>
+                </div>
+                <p id="status-text-${item.id}" style="color: ${statusInfo.color}; font-weight: bold;">
+                    ${statusInfo.text}
+                </p>
+                <button class="delete-btn" onclick="deleteItem(${item.id})">מחק</button>
+            </div>
+        `;
+        container.innerHTML += cardHTML;
+    });
+}
+
+function deleteItem(id) {
+    let items = loadItems();
+    items = items.filter(item => item.id != id);
+    localStorage.setItem('circusIdeas', JSON.stringify(items));
+    renderItems(document.getElementById('emotion-filter').value);
+}
+
+function updateItemStatus(id, newStatus) {
+    let items = loadItems();
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].id == id) {
+            items[i].status = newStatus;
+            break;
+        }
+    }
+    localStorage.setItem('circusIdeas', JSON.stringify(items));
+
+    const statusInfo = getStatusInfo(newStatus);
+    const statusTextElement = document.getElementById('status-text-' + id);
+    if (statusTextElement) {
+        statusTextElement.textContent = statusInfo.text;
+        statusTextElement.style.color = statusInfo.color;
+    }
+}
