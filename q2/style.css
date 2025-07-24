@@ -9,12 +9,12 @@ body {
 }
 
 #page-top {
-    scroll-margin-top: 70px; 
+    scroll-margin-top: 70px;
 }
+
 
 .main-container {
     display: flex;
-    flex-direction: row;
 }
 
 .main-header {
@@ -30,18 +30,24 @@ body {
 }
 
 .main-header p {
-padding-left: 20px;
+    padding-left: 20px;
 }
 
 
 .sidebar {
+    width: 200px;
+    height: calc(100vh - 70px);
     background-color: #555;
     color: white;
     padding: 20px;
-    position: sticky;
+    position: fixed;
+    top: 70px;
+    right: 0;
+    z-index: 998;
 }
 
 .sidebar ul {
+    list-style-type: none;
     padding: 0;
 }
 
@@ -49,12 +55,15 @@ padding-left: 20px;
     padding: 10px 0;
 }
 
+
 .content-area {
+    flex-grow: 1;
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
+    margin-right: 220px;
 }
 
 
@@ -76,6 +85,7 @@ padding-left: 20px;
 
 .image-container {
     position: relative;
+    cursor: pointer;
 }
 
 .image-container .tooltip {
@@ -88,8 +98,9 @@ padding-left: 20px;
     padding: 5px;
     position: absolute;
     z-index: 1;
-    bottom: -10%;
-    left: -40%;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -129,25 +140,11 @@ padding-left: 20px;
 }
 
 
-.sidebar {
-    background-color: #555;
-    color: white;
-    padding: 20px;
-    position: sticky;
-}
-
-.sidebar ul {
-    padding: 0;
-}
-
-.sidebar li {
-    padding: 10px 0;
-}
-
 .panic-button {
+    z-index: 998;
     position: fixed;
     bottom: 20px;
-    left: 50%;
+    left: 90%;
     transform: translateX(-50%);
     background-color: red;
     color: white;
@@ -162,4 +159,39 @@ padding-left: 20px;
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .main-header p {
+        padding-left: 0;
+        margin: 2px 0;
+    }
+    
+   
+    .sidebar {
+        width: 120px;
+        padding: 10px;
+        top: auto;
+    }
+    
+    .content-area {
+        margin-right: 130px;
+    }
+
+   
+    .task-card {
+        width: 95%;
+    }
+
+   
+    .panic-button {
+        left: 85%;
+
+    }
 }
